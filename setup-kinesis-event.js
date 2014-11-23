@@ -30,7 +30,7 @@ kinesis.describeStream({
       var lambdaEventSourceParams = {
         EventSource: streamARN,
         FunctionName: 'streamReader',
-        Role: 'arn:aws:iam::930295567417:role/son_of_exec_role',
+        Role: 'arn:aws:iam::930295567417:role/lambda-kinesis',
         Parameters : {
           InitialPositionInStream: 'TRIM_HORIZON'
         }
