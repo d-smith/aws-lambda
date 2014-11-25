@@ -35,6 +35,7 @@ var listEventSourcesForStream = function() {
         EventSourceArn: streamARN,
         FunctionName: 'streamReader'
       }, function(err, data) {
+        console.log(this.httpResponse.body.toString());
         if(err) {
           console.log(err);
           process.exit(1);
