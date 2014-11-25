@@ -5,7 +5,7 @@ AWS.config.update({region: 'us-east-1'});
 AWS.config.loadFromPath('../config.json');
 
 var httpProxy = process.env.http_proxy;
-if(httpProxy !== null) {
+if(httpProxy !== undefined) {
   console.log('setting http proxy using process.env.http_proxy');
   AWS.config.update({
     httpOptions: {
