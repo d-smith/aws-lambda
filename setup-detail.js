@@ -60,3 +60,4 @@ var describeFunctionConfig = function() {
 };
 
 listEventSourcesForStream();
+describeFunctionConfig();
