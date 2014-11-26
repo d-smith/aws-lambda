@@ -12,9 +12,16 @@ if(httpProxy !== undefined) {
       proxy: httpProxy
     }
   });
+
+  var Agent = require('tunnel-agent').httpsOverHttps;
+  var agent = new Agent({proxy: httpProxy});
+  AWS.config.update({httpOptions: { agent: agent}});
+
 } else {
   console.log("No proxy settings found");
 }
+
+
 
 var lambda = new AWS.Lambda();
 var kinesis = new AWS.Kinesis();
@@ -30,6 +37,8 @@ var listEventSourcesForStream = function() {
     } else {
       var streamARN = data.StreamDescription.StreamARN;
       console.log('list event sources for %s', streamARN);
+
+
 
       lambda.listEventSources({
         EventSourceArn: streamARN,
