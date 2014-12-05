@@ -6,16 +6,10 @@ AWS.config.loadFromPath('../config.json');
 
 var httpProxy = process.env.http_proxy;
 if(httpProxy !== undefined) {
-  console.log('setting http proxy using process.env.http_proxy');
-  AWS.config.update({
-    httpOptions: {
-      proxy: httpProxy
-    }
-  });
 
-  var Agent = require('tunnel-agent').httpsOverHttps;
-  var agent = new Agent({proxy: httpProxy});
-  AWS.config.update({httpOptions: { agent: agent}});
+  var HttpProxyAgent = require('https-proxy-agent');
+  var proxyAgent = new HttpProxyAgent(httpProxy);
+  AWS.config.httpOptions = { agent: proxyAgent };
 
 } else {
   console.log("No proxy settings found");
